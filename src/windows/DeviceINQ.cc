@@ -112,8 +112,6 @@ vector<device> DeviceINQ::Inquire(int length)
 			TCHAR address[40] = { 0 };
 			char name[248] = { 0 };
 			DWORD addressLength = _countof(address);
-			SOCKADDR_BTH *bluetoothSocketAddress = (SOCKADDR_BTH *)querySet->lpcsaBuffer->RemoteAddr.lpSockaddr;
-			BTH_ADDR bluetoothAddress = bluetoothSocketAddress->btAddr;
 			
 			// Emit the corresponding event if we were able to retrieve the address
 			int addressToStringError = WSAAddressToString(
@@ -267,7 +265,6 @@ int DeviceINQ::SdpSearch(string address)
 
 		if (lookupServiceError != SOCKET_ERROR)
 		{
-			char address[19] = { 0 };
 			SOCKADDR_BTH* bluetoothSocketAddress = (SOCKADDR_BTH*)querySet->lpcsaBuffer->RemoteAddr.lpSockaddr;
 			channelID = bluetoothSocketAddress->port;
 			inquiryComplete = true;
