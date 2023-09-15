@@ -60,7 +60,7 @@ void BTSerialPortBinding::Connect()
 
 	if (data->s != SOCKET_ERROR)
 	{
-		SOCKADDR_BTH addr = { 0 };
+		SOCKADDR_BTH addr = {};
 		int addrSize = sizeof(SOCKADDR_BTH);
 		TCHAR addressBuffer[40];
 
