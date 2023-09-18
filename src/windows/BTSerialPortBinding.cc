@@ -58,7 +58,7 @@ void BTSerialPortBinding::Connect()
 
 	data->s = socket(AF_BTH, SOCK_STREAM, BTHPROTO_RFCOMM);
 
-	if (data->s != SOCKET_ERROR)
+	if (data->s != INVALID_SOCKET)
 	{
 		SOCKADDR_BTH addr = {};
 		int addrSize = sizeof(SOCKADDR_BTH);
@@ -91,8 +91,10 @@ void BTSerialPortBinding::Connect()
 	{
 		string message = BluetoothHelpers::GetWSAErrorMessage(WSAGetLastError());
 
-		if (data->s != INVALID_SOCKET)
+		if (data->s != INVALID_SOCKET){
 			closesocket(data->s);
+		}
+			
 
 		throw BluetoothException("Cannot connect: " + message);
 	}
